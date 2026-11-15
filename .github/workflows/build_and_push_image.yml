@@ -48,7 +48,7 @@ jobs:
       - name: Read parameters file
         id: read_parameters
         run: |
-          parameters_json=$(tr -d '\r\n' < parameters.json)
+          parameters_json=$(cat parameters.json | jq -c .)
           echo parameters_json=${parameters_json} >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
@@ -58,8 +58,6 @@ jobs:
           push: true
           tags: ${{ needs.get-tags.outputs.tags }}
           annotations: |
-            foo=1
-            index,manifest,manifest-descriptor:bar=2
             index,manifest,manifest-descriptor:model_parameters='${{ steps.read_parameters.outputs.parameters_json }}'
 
 # TODO get Synapse entity id

@@ -10,24 +10,32 @@ docker run --rm -it -e string_param=string -e integer_param=1 circle-model-demo
 
 # To publish
 
-In your github repo', set the repository secrect
-https://github.com/brucehoff/circle-model-demo/settings/secrets/actions
-
-https://docs.synapse.org/synapse-docs/managing-your-account#Personal-Access-Tokens-(PATs)
+In your GitHub repository's [repository secrets page](https://github.com/<owner>/circle-model-demo/settings/secrets/actions), 
+set the secret `SYNAPSE_PAT` to be your [Synapse personal access token](https://docs.synapse.org/synapse-docs/managing-your-account#Personal-Access-Tokens-(PATs)).
 
 
-SYNAPSE_PAT
+In your GitHub repository's [repository variables page](https://github.com/<owner>/circle-model-demo/settings/variables/actions), 
+set the variable `SYNAPSE_PROJECT_ID` to be the ID of the Synapse project to which you want to push your model.
 
-and the repository variable where you want to push your model
-https://github.com/brucehoff/circle-model-demo/settings/variables/actions
-SYNAPSE_PROJECT_ID
-
-Then push to GitHub.  The model will be pushed to the Synapse Docker Registry and appear under your Synapse project. The Docker repository name will be:
+Once you push to GitHub, the Docker container for your model will be built, pushed
+to the Synapse Docker Registry and will appear under your Synapse project. The Docker repository name will be:
 
 ```
-docker.synapse.org/syn78712390/<owner>/circle-model-demo:<tag>
+docker.synapse.org/<project_id>>/<owner>/circle-model-demo:<tag>
 ```
 
-where `<owner>` is the name of your GitHub account and `<tag>` is the GitHub branch or tag you pushed to.
+where `project_id` is the syn id of your project, `<owner>` is the name of your GitHub account 
+and `<tag>` is the GitHub branch or tag you pushed to.
 
+The parameters for the model can be retrieved **before* pulling the model with this command:
+
+```
+docker buildx imagetools inspect docker.synapse.org/<projectid>/<owner>/circle-model-demo:<tag> --raw | jq .annotations.model_parameters
+```
+
+This will return:
+
+```
+"'{ \"description\":\"model parameters\", \"properties\":{ \"string_param\": { \"description\":\"an example of a string parameter\", \"type\": \"string\" }, \"integer_param\":{ \"description\":\"an example of an integer parameter\", \"type\": \"integer\" } }}'"
+```
 
