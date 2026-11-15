@@ -58,7 +58,7 @@ jobs:
           push: true
           tags: ${{ needs.get-tags.outputs.tags }}
           annotations: |
-            index,manifest,manifest-descriptor:model_parameters='${{ steps.read_parameters.outputs.parameters_json }}'
+            index,manifest,manifest-descriptor:model_parameters=${{ steps.read_parameters.outputs.parameters_json }}
 
 # TODO get Synapse entity id
 # TODO add discovery metadata
