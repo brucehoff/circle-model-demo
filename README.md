@@ -12,6 +12,10 @@ docker run --rm -it -e string_param=string -e integer_param=1 circle-model-demo
 
 In your github repo', set the repository secrect
 https://github.com/brucehoff/circle-model-demo/settings/secrets/actions
+
+https://docs.synapse.org/synapse-docs/managing-your-account#Personal-Access-Tokens-(PATs)
+
+
 SYNAPSE_PAT
 
 and the repository variable where you want to push your model
