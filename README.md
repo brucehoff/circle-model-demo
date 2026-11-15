@@ -21,7 +21,7 @@ Once you push to GitHub, the Docker container for your model will be built, push
 to the Synapse Docker Registry and will appear under your Synapse project. The Docker repository name will be:
 
 ```
-docker.synapse.org/<project_id>>/<owner>/circle-model-demo:<tag>
+docker.synapse.org/<project_id>/<owner>/circle-model-demo:<tag>
 ```
 
 where `project_id` is the syn id of your project, `<owner>` is the name of your GitHub account 
