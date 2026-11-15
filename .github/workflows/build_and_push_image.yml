@@ -48,11 +48,8 @@ jobs:
       - name: Read parameters file
         id: read_parameters
         run: |
-          {
-            echo 'parameters_json<<EOF'
-            cat parameters.json
-            echo 'EOF'
-          } >> $GITHUB_OUTPUT
+          parameters_json=$(tr -d '\r\n' < parameters.json)
+          echo parameters_json=${parameters_json} >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6.4.0
