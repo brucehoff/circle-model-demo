@@ -52,7 +52,7 @@ jobs:
           push: true
           tags: ${{ needs.get-tags.outputs.tags }}
           annotations:
-            - model_parameters: "{\"foo\":\"bar\"}"
+            - model_parameters: "TODO"
 
 # TODO      - name: Create provenance record
   
