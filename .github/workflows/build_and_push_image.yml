@@ -17,10 +17,10 @@ jobs:
     steps:
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v4.1.1
+        uses: docker/metadata-action@v6.2.0
         with:
           images: |
-            docker.synapse.org/${{ vars.SYNAPSE_PROJECT_ID }}
+            docker.synapse.org/${{ vars.SYNAPSE_PROJECT_ID }}/${{ github.repository }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
