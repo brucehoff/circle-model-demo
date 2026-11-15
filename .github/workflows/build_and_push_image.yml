@@ -58,6 +58,8 @@ jobs:
           push: true
           tags: ${{ needs.get-tags.outputs.tags }}
           annotations: |
+            foo=1
+            'bar=2'
             'model_parameters="${{ steps.read_parameters.outputs.parameters_json }}"'
 
 # TODO get Synapse entity id
