@@ -1,7 +1,6 @@
-FROM ubuntu:22.04
+FROM python
 
+COPY hello_world.py /hello_world.py
+COPY parameters.json /parameters.json
 
-COPY hello_world.py hello_world.py
-
-# TODO parameters
-CMD ["python3 hello_world.py"]
+CMD ["python", "hello_world.py"]
