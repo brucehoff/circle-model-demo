@@ -1,0 +1,13 @@
+{
+    "description":"model parameters",
+    "properties":{
+		"string_param": {
+		    "description":"an example of a string parameter",
+			"type": "string"
+		},
+		"integer_param":{
+			"description":"an example of an integer parameter",
+			"type": "integer"
+		}
+    }
+}
