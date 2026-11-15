@@ -60,7 +60,7 @@ jobs:
           annotations: |
             foo=1
             "index,manifest,manifest-descriptor:bar=2"
-            "index,manifest,manifest-descriptor:model_parameters=${{ steps.read_parameters.outputs.parameters_json }}"
+            "index,manifest,manifest-descriptor:model_parameters='${{ steps.read_parameters.outputs.parameters_json }}'"
 
 # TODO get Synapse entity id
 # TODO add discovery metadata
