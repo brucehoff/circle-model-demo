@@ -27,15 +27,27 @@ docker.synapse.org/<project_id>>/<owner>/circle-model-demo:<tag>
 where `project_id` is the syn id of your project, `<owner>` is the name of your GitHub account 
 and `<tag>` is the GitHub branch or tag you pushed to.
 
-The parameters for the model can be retrieved **before* pulling the model with this command:
+The parameters for the model can be retrieved **before** pulling the model with this command:
 
 ```
-docker buildx imagetools inspect docker.synapse.org/<projectid>/<owner>/circle-model-demo:<tag> --raw | jq .annotations.model_parameters
+docker buildx imagetools inspect docker.synapse.org/<project_id>/<owner>/circle-model-demo:<tag> --raw | jq -r '.annotations.model_parameters |   fromjson'
 ```
 
 This will return:
 
 ```
-"'{ \"description\":\"model parameters\", \"properties\":{ \"string_param\": { \"description\":\"an example of a string parameter\", \"type\": \"string\" }, \"integer_param\":{ \"description\":\"an example of an integer parameter\", \"type\": \"integer\" } }}'"
+{
+  "description": "model parameters",
+  "properties": {
+    "string_param": {
+      "description": "an example of a string parameter",
+      "type": "string"
+    },
+    "integer_param": {
+      "description": "an example of an integer parameter",
+      "type": "integer"
+    }
+  }
+}
 ```
 

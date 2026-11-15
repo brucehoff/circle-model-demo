@@ -11,6 +11,9 @@ on:
     branches:
       - '*'
 
+env:
+  BASE_IMAGE_PATH: docker.synapse.org/${{ vars.SYNAPSE_PROJECT_ID }}/${{ github.repository }}
+
 jobs:
   get-tags:
     runs-on: ubuntu-latest
@@ -20,7 +23,7 @@ jobs:
         uses: docker/metadata-action@v6.2.0
         with:
           images: |
-            docker.synapse.org/${{ vars.SYNAPSE_PROJECT_ID }}/${{ github.repository }}
+            ${{ env.BASE_IMAGE_PATH }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -60,8 +63,18 @@ jobs:
           annotations: |
             index,manifest,manifest-descriptor:model_parameters=${{ steps.read_parameters.outputs.parameters_json }}
 
-# TODO get Synapse entity id
-# TODO add discovery metadata
-# TODO      - name: Create provenance record
-  
+      - name: Get Syn ID of the repository
+        id: getsynid
+        run: |
+          entity_id=$(curl -H "Authorization: Bearer ${{ secrets.SYNAPSE_PAT }}" https://repo-prod.prod.sagebase.org/repo/v1/entity/dockerRepo/id?repositoryName=${{ env.BASE_IMAGE_PATH }} | jq .id)
+          echo entity_id $entity_id
+          echo entity_id=$entity_id >> $GITHUB_OUTPUT
+
+      - name: Add descriptive metadata
+        run: |
+          echo TODO: Add entity annotations for the descriptive/discovery metadata for the model
+
+      - name: Create provenance record
+        run: |
+          echo TODO: Create or update a Synapse Activity linking the Docker repo' to the GitHub commit it came from
 ...
