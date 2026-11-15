@@ -32,6 +32,7 @@ jobs:
       
 
   build_container:
+    runs-on: ubuntu-latest
     steps:
       - name: Login to Synapse Container Registry
         uses: docker/login-action@v2
